@@ -6,3 +6,7 @@ Repositório usado para subir o lab de microserviços do Health API no ECS usand
 O Objetivo é subir um ambiente com comunicação distribuída entre vários microserviços internos e externos dentro da AWS 
 
 ![v1](.github/assets/health-api.png)
+
+## [V2] - API Gateway e VPC Link para Exposição Externa
+
+![v2](.github/assets/health-api-gateway.png)
