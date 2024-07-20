@@ -37,6 +37,8 @@ module "imc" {
     }
   ]
 
+  service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
+
   service_hosts = [
     "imc.linuxtips-ecs-cluster.internal.com"
   ]

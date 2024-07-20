@@ -1,6 +1,7 @@
 module "proteins" {
   # source                      = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1"
   source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
+
   region       = var.region
   cluster_name = var.cluster_name
 
@@ -37,6 +38,8 @@ module "proteins" {
     }
   ]
 
+  service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
+
   service_hosts = [
     "proteins.linuxtips-ecs-cluster.internal.com"
   ]
@@ -55,5 +58,4 @@ module "proteins" {
     data.aws_ssm_parameter.private_subnet_2.value,
     data.aws_ssm_parameter.private_subnet_3.value,
   ]
-
 }

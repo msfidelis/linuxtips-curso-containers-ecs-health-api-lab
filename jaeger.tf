@@ -6,8 +6,8 @@ module "jaeger-collector" {
 
   service_name   = "nutrition-jaeger-collector"
   service_port   = "9411"
-  service_cpu    = 256
-  service_memory = 512
+  service_cpu    = 512
+  service_memory = 1024
 
   task_minimum       = 1
   task_maximum       = 1
@@ -55,5 +55,7 @@ module "jaeger-collector" {
     data.aws_ssm_parameter.private_subnet_2.value,
     data.aws_ssm_parameter.private_subnet_3.value,
   ]
+
+  service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
 
 }

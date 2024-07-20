@@ -41,6 +41,8 @@ module "health_api" {
     "health.linuxtips.demo"
   ]
 
+  service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
+  
   environment_variables = [
     {
       name  = "ZIPKIN_COLLECTOR_ENDPOINT"
@@ -48,15 +50,15 @@ module "health_api" {
     },
     {
       name  = "BMR_SERVICE_ENDPOINT",
-      value = "bmr.linuxtips-ecs-cluster.internal.com"
+      value = "nutrition-bmr.linuxtips-ecs-cluster.discovery.com:30000"
     },
     {
       name  = "IMC_SERVICE_ENDPOINT",
-      value = "imc.linuxtips-ecs-cluster.internal.com"
+      value = "nutrition-imc.linuxtips-ecs-cluster.discovery.com:30000"
     },
     {
       name  = "RECOMMENDATIONS_SERVICE_ENDPOINT",
-      value = "recommendations.linuxtips-ecs-cluster.internal.com"
+      value = "nutrition-recommendations.linuxtips-ecs-cluster.discovery.com:30000"
     }
   ]
 

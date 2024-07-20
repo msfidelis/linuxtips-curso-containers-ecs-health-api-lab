@@ -37,6 +37,8 @@ module "calories" {
     }
   ]
 
+  service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
+
   service_hosts = [
     "calories.linuxtips-ecs-cluster.internal.com"
   ]

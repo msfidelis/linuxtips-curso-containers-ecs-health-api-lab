@@ -41,6 +41,8 @@ module "recommendations" {
     "recommendations.linuxtips-ecs-cluster.internal.com"
   ]
 
+  service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
+
   environment_variables = [
     {
       name  = "ZIPKIN_COLLECTOR_ENDPOINT"
@@ -48,15 +50,15 @@ module "recommendations" {
     },
     {
       name  = "PROTEINS_SERVICE_ENDPOINT"
-      value = "proteins.linuxtips-ecs-cluster.internal.com"
+      value = "nutrition-proteins.linuxtips-ecs-cluster.discovery.com:30000"
     },
     {
       name  = "WATER_SERVICE_ENDPOINT"
-      value = "water.linuxtips-ecs-cluster.internal.com"
+      value = "nutrition-water.linuxtips-ecs-cluster.discovery.com:30000"
     },
     {
       name  = "CALORIES_SERVICE_ENDPOINT"
-      value = "calories.linuxtips-ecs-cluster.internal.com"
+      value = "nutrition-calories.linuxtips-ecs-cluster.discovery.com:30000"
     },
   ]
 

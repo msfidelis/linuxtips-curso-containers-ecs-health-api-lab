@@ -37,3 +37,7 @@ variable "ssm_private_subnet_2" {
 variable "ssm_private_subnet_3" {
   default = "/linuxtips-vpc/vpc/subnet_private_1c"
 }
+
+variable "ssm_service_discovery_namespace" {
+  default = "/linuxtips/ecs/cloudmap/namespace"
+}

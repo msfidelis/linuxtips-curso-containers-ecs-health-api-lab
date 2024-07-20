@@ -37,6 +37,8 @@ module "water" {
     }
   ]
 
+  service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
+
   service_hosts = [
     "water.linuxtips-ecs-cluster.internal.com"
   ]
