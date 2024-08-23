@@ -1,6 +1,6 @@
 module "imc" {
-  # source                      = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1"
-  source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
+  source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
+  # source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
   region       = var.region
   cluster_name = var.cluster_name
 

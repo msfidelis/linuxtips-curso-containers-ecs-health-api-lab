@@ -1,6 +1,6 @@
 module "health_api" {
-  # source                      = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1"
-  source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
+  source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
+  # source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
   region       = var.region
   cluster_name = var.cluster_name
 
@@ -42,7 +42,7 @@ module "health_api" {
   ]
 
   service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
-  
+
   environment_variables = [
     {
       name  = "ZIPKIN_COLLECTOR_ENDPOINT"
