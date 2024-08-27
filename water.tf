@@ -1,6 +1,6 @@
 module "water" {
-  source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
-  # source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
+  # source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
+  source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
   region       = var.region
   cluster_name = var.cluster_name
 
@@ -9,6 +9,9 @@ module "water" {
   service_cpu    = 256
   service_memory = 512
 
+  service_protocol = "grpc"
+
+  
   task_minimum       = 1
   task_maximum       = 3
   service_task_count = 1
@@ -17,6 +20,10 @@ module "water" {
 
   service_listener = data.aws_ssm_parameter.listener_internal.value
   alb_arn          = data.aws_ssm_parameter.alb_internal.value
+
+  // Service Connect
+  service_connect_name = data.aws_ssm_parameter.service_connect_name.value
+  service_connect_arn  = data.aws_ssm_parameter.service_connect_namespace_arn.value
 
   service_task_execution_role = aws_iam_role.main.arn
 

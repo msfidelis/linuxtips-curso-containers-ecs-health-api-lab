@@ -1,11 +1,16 @@
 module "health_api" {
-  source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
-  # source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
+  # source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
+
+
+  source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
   region       = var.region
   cluster_name = var.cluster_name
 
   service_name   = "nutrition-health-api"
   service_port   = "8080"
+
+  service_protocol = "http"
+  
   service_cpu    = 256
   service_memory = 512
 
@@ -41,6 +46,10 @@ module "health_api" {
     "health.linuxtips.demo"
   ]
 
+  // Service Connect
+  service_connect_name = data.aws_ssm_parameter.service_connect_name.value
+  service_connect_arn  = data.aws_ssm_parameter.service_connect_namespace_arn.value
+
   service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
 
   environment_variables = [
@@ -50,16 +59,20 @@ module "health_api" {
     },
     {
       name  = "BMR_SERVICE_ENDPOINT",
-      value = "nutrition-bmr.linuxtips-ecs-cluster.discovery.com:30000"
+      value = "nutrition-bmr.linuxtips-ecs-cluster.local:30000"
     },
     {
       name  = "IMC_SERVICE_ENDPOINT",
-      value = "nutrition-imc.linuxtips-ecs-cluster.discovery.com:30000"
+      value = "nutrition-imc.linuxtips-ecs-cluster.local:30000"
     },
     {
       name  = "RECOMMENDATIONS_SERVICE_ENDPOINT",
-      value = "nutrition-recommendations.linuxtips-ecs-cluster.discovery.com:30000"
-    }
+      value = "nutrition-recommendations.linuxtips-ecs-cluster.local:30000"
+    },
+    {
+      name  = "RELEASE"
+      value = timestamp()
+    },
   ]
 
   vpc_id = data.aws_ssm_parameter.vpc.value
