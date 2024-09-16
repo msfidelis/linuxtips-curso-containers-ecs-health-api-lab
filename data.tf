@@ -33,3 +33,11 @@ data "aws_ssm_parameter" "private_subnet_3" {
 data "aws_ssm_parameter" "service_discovery_namespace" {
   name = var.ssm_service_discovery_namespace
 }
+
+data "aws_ssm_parameter" "service_connect_name" {
+  name = var.ssm_service_connect_name
+}
+
+data "aws_ssm_parameter" "service_connect_arn" {
+  name = var.ssm_service_connect_arn
+}
