@@ -21,8 +21,8 @@ module "health_api" {
   service_connect_name = data.aws_ssm_parameter.service_connect_name.value
   service_connect_arn  = data.aws_ssm_parameter.service_connect_arn.value
 
-  service_listener = data.aws_ssm_parameter.listener.value
-  alb_arn          = data.aws_ssm_parameter.alb.value
+  service_listener = data.aws_ssm_parameter.listener_internal.value
+  alb_arn          = data.aws_ssm_parameter.alb_internal.value
 
   service_task_execution_role = aws_iam_role.main.arn
 
@@ -44,7 +44,8 @@ module "health_api" {
   ]
 
   service_hosts = [
-    "health.linuxtips.demo"
+    # "health.linuxtips.demo"
+    "health.linuxtips-ecs-cluster.internal.com"
   ]
 
   service_discovery_namespace = data.aws_ssm_parameter.service_discovery_namespace.value
@@ -65,7 +66,12 @@ module "health_api" {
     {
       name  = "RECOMMENDATIONS_SERVICE_ENDPOINT",
       value = "nutrition-recommendations.linuxtips-ecs-cluster.local:30000"
+    },
+    {
+      name  = "version"
+      value = timestamp()
     }
+
   ]
 
   vpc_id = data.aws_ssm_parameter.vpc.value

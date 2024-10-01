@@ -66,9 +66,9 @@ module "recommendations" {
       value = "nutrition-calories.linuxtips-ecs-cluster.local:30000"
     },
     {
-      name  = "VERSION"
-      value = "1"
-    },
+      name  = "version"
+      value = timestamp()
+    }
   ]
 
   vpc_id = data.aws_ssm_parameter.vpc.value
