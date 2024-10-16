@@ -16,7 +16,7 @@ module "health_api" {
   container_image = "fidelissauro/health-api:latest"
 
   // Service Connect
-  use_service_connect  = true
+  use_service_connect  = false
   service_protocol     = "http"
   service_connect_name = data.aws_ssm_parameter.service_connect_name.value
   service_connect_arn  = data.aws_ssm_parameter.service_connect_arn.value
@@ -43,6 +43,10 @@ module "health_api" {
     }
   ]
 
+  deployment_controller = "CODE_DEPLOY"
+
+  # codedeploy_strategy = "CodeDeployDefault.ECSLinear10PercentEvery1Minutes"
+
   service_hosts = [
     # "health.linuxtips.demo"
     "health.linuxtips-ecs-cluster.internal.com"
@@ -53,19 +57,19 @@ module "health_api" {
   environment_variables = [
     {
       name  = "ZIPKIN_COLLECTOR_ENDPOINT"
-      value = "http://jaeger-collector.linuxtips-ecs-cluster.internal.com:80"
+      value = "http://jaeger-collector.linuxtips-ecs-cluster.discovery.com:80"
     },
     {
       name  = "BMR_SERVICE_ENDPOINT",
-      value = "nutrition-bmr.linuxtips-ecs-cluster.local:30000"
+      value = "nutrition-bmr.linuxtips-ecs-cluster.discovery.com:30000"
     },
     {
       name  = "IMC_SERVICE_ENDPOINT",
-      value = "nutrition-imc.linuxtips-ecs-cluster.local:30000"
+      value = "nutrition-imc.linuxtips-ecs-cluster.discovery.com:30000"
     },
     {
       name  = "RECOMMENDATIONS_SERVICE_ENDPOINT",
-      value = "nutrition-recommendations.linuxtips-ecs-cluster.local:30000"
+      value = "nutrition-recommendations.linuxtips-ecs-cluster.discovery.com:30000"
     },
     {
       name  = "version"
